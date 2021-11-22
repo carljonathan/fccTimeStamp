@@ -9,11 +9,9 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html')
 })
 
-app.get('/api/:date', (req, res) => {
-    const input = req.params.date
-    let output;
-    if (!input) output = new Date().toString()
-    input
+app.get('/api', (req, res, next) => {
+    req.time = new Date().toString()
+    next()
 }, (req, res) => {
-    res.json({"utc": output})
+    res.json({"utc": req.time})
 })
