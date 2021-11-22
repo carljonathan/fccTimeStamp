@@ -13,5 +13,5 @@ app.get('/api', (req, res, next) => {
     req.time = new Date().toString()
     next()
 }, (req, res) => {
-    res.json({"utc": req.time})
+    res.send({"utc": req.time})
 })
