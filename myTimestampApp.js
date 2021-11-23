@@ -13,9 +13,19 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html')
 })
 
-app.get('/api', (req, res, next) => {
-    req.time = new Date().toString()
-    next()
-}, (req, res) => {
-    res.send({"utc": req.time})
+app.get('/api/:date?', (req, res) => {
+    let currDate = req.params.date
+    if (!date) {
+        let UNIXTimeNow = Date.now() // get current dateTime in UNIX milliseconds
+        let UTCTimeNow = new Date(UNIXTimeNow).toUTCString() // convert to UTC
+        res.json({ UNIXTimeNow, UTCTimeNow })
+    } else {
+        let UNIXReqTime = Date(currDate)
+        if (isNaN(UNIXReqTime)) {
+            res.json({ "error": "Invalid date"})
+        } else {
+            let UTCReqTime = new Date(UNIXReqTime).toUTCString()
+            res.json({ UNIXReqTime, UTCReqTime})
+        }
+    }
 })
