@@ -24,7 +24,21 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-
+app.get('api/:date?', (req, res) => {
+  let date = req.params.date
+  if (!date) {
+    let UNIXDateTimeNow = Date.now()
+    let UTCDateTimeNow = UNIXDateTimeNow.toUTCString()
+    res.json({ UNIXDateTimeNow, UTCDateTimeNow})
+  } else {
+    let UNIXReqTime = new Date(date)
+    if (isNaN(UNIXReqTime)) {
+      res.json({ error: 'Invalid Date' })
+    }
+    let UTCReqTime = UNIXReqTime.toUTCString()
+    res.json({ UNIXReqTime, UTCReqTime})
+  }
+})
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
