@@ -27,16 +27,16 @@ app.get("/api/hello", function (req, res) {
 app.get('/api/:date?', (req, res) => {
   let date = req.params.date
   if (!date) {
-    let UNIX = Date.now()
-    let UTC = new Date(UNIX).toUTCString()
-    res.json({ UNIX, UTC })
+    let unix = Date.now()
+    let utc = new Date(unix).toUTCString()
+    res.json({ unix, utc })
   } else {
-    let UNIXReqTime = new Date(date)
-    if (isNaN(UNIXReqTime)) {
+    let unix = new Date(date)
+    if (isNaN(unix)) {
       res.json({ error: 'Invalid Date' })
     }
-    let UTCReqTime = UNIXReqTime.toUTCString()
-    res.json({ UNIXReqTime, UTCReqTime})
+    let utc = unix.toUTCString()
+    res.json({ unix, utc })
   }
 })
 
