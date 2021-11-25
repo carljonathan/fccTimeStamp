@@ -31,7 +31,7 @@ app.get('/api/:date?', (req, res) => {
     let utc = new Date(unix).toUTCString()
     res.json({ unix, utc })
   } else {
-    let unix = Date.parse(date)
+    let unix = new Date(date).getTime()
     if (isNaN(unix)) {
       res.json({ error: 'Invalid Date' })
     }
