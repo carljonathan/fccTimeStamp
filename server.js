@@ -33,12 +33,13 @@ app.get('/api/:date?', (req, res) => {
     utc = new Date(unix).toUTCString()
     res.json({ unix, utc })
   } else {
+    let dateDate
     let dateNum = Number(date)
     if (!isNaN(dateNum)) {
       dateNum = dateNum * 10
-      unix = new Date(dateNum)
+      dateDate = new Date(dateNum)
     }
-    const dateDate = new Date(date)
+    dateDate = new Date(date)
     console.log(date, typeof date, dateDate, typeof dateDate)
     if (!isNaN(dateDate) && dateDate instanceof Date) {
       unix = dateDate.getTime()
