@@ -24,30 +24,35 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+// route for API response on date request
 app.get('/api/:date?', (req, res) => {
   const date = req.params.date
   let unix
   let utc
+  // if no date is provided in the url, send today's date
   if (!date) {
     unix = Date.now()
     utc = new Date(unix).toUTCString()
-    console.log(`unix: ${unix}, utc: ${utc}`)
     res.json({ unix, utc })
   } else {
     let dateDate
-    let dateNum = Number(date)
+    // convert unix date to number from string
+    const dateNum = Number(date)
+    // check if url date is number
     if (!isNaN(dateNum)) {
-      // dateNum = dateNum / 10
+      // create new Date object from url UNIX request
       dateDate = new Date(dateNum)
     } else {
+      // if date is valid date string, convert to Date object
       dateDate = new Date(date)
     }
+    // if the date is a valid instance of Date, responde with json
     if (!isNaN(dateDate) && dateDate instanceof Date) {
       unix = dateDate.getTime()
       utc = dateDate.toUTCString()
-      console.log(`unix: ${unix}, utc: ${utc}`)
       res.json({ unix, utc })
     }
+    // if date is not valid instance of Date, repsond with error
     res.json({ error: 'Invalid Date' })
   }
 })
