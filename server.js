@@ -38,8 +38,9 @@ app.get('/api/:date?', (req, res) => {
     if (!isNaN(dateNum)) {
       dateNum = dateNum * 10
       dateDate = new Date(dateNum)
+    } else {
+      dateDate = new Date(date)
     }
-    dateDate = new Date(date)
     console.log(date, typeof date, dateDate, typeof dateDate)
     if (!isNaN(dateDate) && dateDate instanceof Date) {
       unix = dateDate.getTime()
