@@ -35,7 +35,6 @@ app.get('/api/:date?', (req, res) => {
   } else {
     let dateNumber = Number(date)
     unix = new Date(dateNumber)
-    let unix = new Date(date).getTime()
     if (isNaN(unix)) {
       res.json({ error: 'Invalid Date' })
     }
