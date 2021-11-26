@@ -34,7 +34,6 @@ app.get('/api/:date?', (req, res) => {
     res.json({ unix, utc })
   } else {
     const dateDate = new Date(date)
-    const 
     if (!isNaN(dateDate) && dateDate instanceof Date) {
       unix = dateDate
       utc = dateDate.toUTCString()
