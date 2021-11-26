@@ -37,7 +37,7 @@ app.get('/api/:date?', (req, res) => {
     let dateDate
     let dateNum = Number(date)
     if (!isNaN(dateNum)) {
-      dateNum = dateNum / 10
+      // dateNum = dateNum / 10
       dateDate = new Date(dateNum)
     } else {
       dateDate = new Date(date)
