@@ -34,7 +34,7 @@ app.get('/api/:date?', (req, res) => {
     res.json({ unix, utc })
   } else {
     const dateNumber = Number(date)
-    console.log(date, dateNumber)
+    console.log(typeof date, dateNumber)
     if (isNaN(dateNumber)) {
       res.json({ error: 'Invalid Date' })
     }
